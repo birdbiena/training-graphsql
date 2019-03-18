@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/jquery-3.3.1.min.js"></script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <script>
+        (function (win, doc, $) {
+            let token = localStorage.getItem('Authorization');
+
+            // $.ajax({
+            //     url: '/users',
+            //     type: 'GET',
+            //     headers: {
+            //         authorization: `Bearer ${token}`
+            //     }
+            // }).then(response => {
+            //     console.log('response :', response);
+            // }).catch(error => {
+            //     if (error.status === 401) {
+            //         window.location.href = '/login';
+            //     }
+            // });
+
+            $.ajax({
+                url: '/comments/1',
+                type: 'GET',
+                headers: {
+                    authorization: `Bearer ${token}`
+                }
+            }).then(response => {
+                console.log('response :', response);
+            }).catch(error => {
+                if (error.status === 401) {
+                    window.location.href = '/login';
+                }
+            });
+        })(window, document, jQuery);
+    </script>
+  </body>
+</html>

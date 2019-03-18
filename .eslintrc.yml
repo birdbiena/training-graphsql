@@ -1,0 +1,17 @@
+---
+root: true
+parser: 'babel-eslint'
+env: 
+  commonjs: true
+  browser: true
+  node: true
+  es6: true
+extends: 
+  - standard
+  - eslint:recommended
+  - plugin:node/recommended
+plugins:
+  - node
+  - html
+rules: {}
+globals: {}
