@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "babel-node ./bin/www",
     "server": "nodemon --exec babel-node ./bin/www"
   },
   "repository": {
@@ -20,6 +20,7 @@
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "bootstrap": "^4.3.1",
     "concurrently": "^4.1.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",

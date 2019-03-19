@@ -1,5 +1,5 @@
 const expressJwt = require('express-jwt');
-const conf = require('./../conf/db');
+const conf = require('./../conf/constant');
 
 const jwtAuth = expressJwt({
     secret: conf.secret,

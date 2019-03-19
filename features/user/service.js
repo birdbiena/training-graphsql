@@ -15,39 +15,39 @@ const user = require('../../data/user_sql');
 const database = new Database();
 
 module.exports = {
-	add: function(user) {
-		return database.query(user.insert, user);
+	add: function(userObj) {
+		return database.query(user.user_info.insert, userObj);
 	},
 
-	update: function(user, id) {
+	update: function(userObj, id) {
 		var arr = [];
 
-		arr.push(user.username);
-		arr.push(user.mobile);
-		arr.push(user.email);
-		arr.push(user.address);
-		arr.push(user.age);
-		arr.push(user.sex);
-		arr.push(user.avatar);
+		arr.push(userObj.username);
+		arr.push(userObj.mobile);
+		arr.push(userObj.email);
+		arr.push(userObj.address);
+		arr.push(userObj.age);
+		arr.push(userObj.sex);
+		arr.push(userObj.avatar);
 		arr.push(id);
 
-		return database.query(user.update, arr);
+		return database.query(user.user_info.update, arr);
 	},
 
 	delete: function(key) {
 		// 标记型删除
-		return database.query(user.delete, key);
+		return database.query(user.user_info.delete, key);
 	},
 
 	queryById: function(key) {
-		return database.query(user.queryById, key);
+		return database.query(user.user_info.queryById, key);
 	},
 
 	queryAll: function() {
-		return database.query(user.queryAll);
+		return database.query(user.user_info.queryAll);
 	},
 
 	validate: user_name => {
-		return database.query(user.login, user_name);
+		return database.query(user.user_login.login, user_name);
 	}
 };

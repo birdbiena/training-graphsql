@@ -1,139 +1,64 @@
 <!DOCTYPE html>
-<!--[if IE 6]><html class='ie lt-ie8'><![endif]-->
-<!--[if IE 7]><html class='ie lt-ie8'><![endif]-->
-<!--[if IE 8]><html class='ie ie8'><![endif]-->
-<!--[if IE 9]><html class='ie ie9'><![endif]-->
-<!--[if !IE]><!-->
-<html>
-<!--<![endif]-->
+<html lang="en">
 
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=Edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0,user-scalable=no'>
-    <meta name='description' content='这只是一个测试!'>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Cat.Yang">
+    <title>Blog Login · Bootstrap</title>
 
-    <!-- Apple -->
-    <meta name='apple-mobile-web-app-title' content='简书'>
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" >
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
-    <title>登录 - 简书</title>
-
-    <link rel='stylesheet' media='all' href='/stylesheets/global.css' />
-    <link rel='stylesheet' media='all' href='/stylesheets/login.css' />
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="/stylesheets/sign_in.css" rel="stylesheet">
 
     <script src="/javascripts/jquery-3.3.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </head>
 
-<body class='no-padding reader-black-font' lang='zh-CN'>
-    <div class='sign'>
-        <div class='logo'>
-            <a href='/'>
-                <img src='' alt='Logo' />
-            </a>
+<body>
+    <form class="form-signin" id='new_session' action='/login' accept-charset='UTF-8' method='post'>
+        <div class="text-center mb-4">
+            <img class="mb-4" src="/images/Naruto.jpg" alt="" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">My Blog</h1>
         </div>
-        <div class='main'>
 
-            <h4 class='title'>
-                <div class='normal-title'>
-                    <a class='active' href='/login'>登录</a>
-                    <b>·</b>
-                    <a id='js-sign-up-btn' class='' href='/register'>注册</a>
-                </div>
-            </h4>
-
-            <div class='js-sign-in-container'>
-                <form id='new_session' action='/login' accept-charset='UTF-8' method='post'>
-                    <!-- <input name='utf8' type='hidden' value='&#x2713;' />
-                    <input type='hidden' name='authenticity_token' value='EwfFyVgXv0x/4NxtKMoreJbkfXF9fbee8roojliFRXAKMPe+zXWp+47EDJefBD74rhwlIs9aoNxd/D2//Mt+oQ=='
-                    /> -->
-
-                    <!-- 正常登录登录名输入框 -->
-                    <div class='input-prepend restyle js-normal'>
-                        <input placeholder='手机号或邮箱' type='text' name='user_name' id='session_email_or_mobile_number' value="birdbiena@gmail.com" />
-                        <i class='iconfont ic-user'></i>
-                    </div>
-
-                    <div class='input-prepend'>
-                        <input placeholder='密码' type='password' name='password' id='session_password' value="123123a@1." />
-                        <i class='iconfont ic-password'></i>
-                    </div>
-
-                    <input value='false' type='hidden' name='oversea' id='session_oversea' />
-
-                    <!-- <div>
-                        <input id='sign-in-form-captcha-challenge' name='captcha[validation][challenge]' autocomplete='off' type='hidden'>
-                        <input id='sign-in-form-captcha-gt' name='captcha[validation][gt]' autocomplete='off' type='hidden'>
-                        <input id='sign-in-form-captcha-validate' name='captcha[validation][validate]' autocomplete='off' type='hidden'>
-                        <input id='sign-in-form-captcha-seccode' name='captcha[validation][seccode]' autocomplete='off' type='hidden'>
-                    </div> -->
-
-                    <div class='remember-btn'>
-                        <input type='checkbox' value='true' checked='checked' name='remember_me' id='session_remember_me' />
-                        <span>记住我</span>
-                    </div>
-
-                    <div class='forget-btn'>
-                        <a class='' data-toggle='dropdown' href=''>登录遇到问题?</a>
-                        <ul class='dropdown-menu'>
-                            <li>
-                                <a href='/users/password/mobile_reset'>用手机号重置密码</a>
-                            </li>
-                            <li>
-                                <a href='/users/password/email_reset'>用邮箱重置密码</a>
-                            </li>
-                            <li>
-                                <a target='_blank' href='/p/9058d0b8711d'>无法用海外手机号登录</a>
-                            </li>
-                            <li>
-                                <a target='_blank' href='/p/498a9fa7da08'>无法用 Google 帐号登录</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <button class='sign-in-button' id='sign-in-form-submit-btn' type='button'>
-                        <span id='sign-in-loading'></span>
-                        登录
-                    </button>
-
-                </form>
-
-                <!-- 更多登录方式 -->
-                <div class='more-sign'>
-                    <h6>社交帐号登录</h6>
-                    <ul>
-                        <li id='weibo-link-wrap' class='weibo-loading'>
-                            <a class='weibo' id='weibo-link'>
-                                <i class='iconfont ic-weibo'></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a class='weixin' target='_blank' href='/users/auth/wechat'>
-                                <i class='iconfont ic-wechat'></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a class='qq' target='_blank' href='/users/auth/qq_connect'>
-                                <i class='iconfont ic-qq_connect'></i>
-                            </a>
-                        </li>
-                        <li class='js-more-method'>
-                            <a href='javascript:void(0);'>
-                                <i class='iconfont ic-more'></i>
-                            </a>
-                        </li>
-                        <li class='js-hide-method hide'>
-                            <a class='douban' target='_blank' href='/users/auth/douban'>
-                                <i class='iconfont ic-douban'></i>
-                            </a>
-                        </li>
-                    </ul>
-
-                    <div class='weibo-geetest-captcha'></div>
-                </div>
-            </div>
-
+        <div class="form-label-group">
+            <input type="email" name='user_name' id='session_email_or_mobile_number' value="birdbiena@gmail.com"  class="form-control" placeholder="Email address" required="" autofocus="">
+            <label for="inputEmail">Email address</label>
         </div>
-    </div>
+
+        <div class="form-label-group">
+            <input type="password" name='password' id='session_password' value="123123a@1." class="form-control" placeholder="Password" required="">
+            <label for="inputPassword">Password</label>
+        </div>
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" id='sign-in-form-submit-btn' type="button">Sign in</button>
+        <p class="mt-5 mb-3 text-muted text-center">© 2018-2019</p>
+    </form>
 
     <script>
         (function(win, doc, $) {
@@ -142,9 +67,11 @@
                     user_name: $('#session_email_or_mobile_number').val(),
                     password: $('#session_password').val()
                 }).then(response => {
-                    if (response.success) {
-                        localStorage.setItem('Authorization', response.token);
+                    if (response.code) {
+                        localStorage.setItem('Authorization', response.data.token);
                         win.location.href = '/';
+                    } else {
+                        alert(response.msg);
                     }
                 }).catch(error => {
                     console.log('error :', error);
@@ -153,6 +80,4 @@
         })(window, document, jQuery);
     </script>
 </body>
-
 </html>
-

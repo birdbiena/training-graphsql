@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 const _ = require('lodash');
-const conf = require('../conf/db');
+const conf = require('./../conf/constant');
 
 class Database {
     constructor() {
