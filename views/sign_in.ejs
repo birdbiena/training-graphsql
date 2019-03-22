@@ -1,41 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Cat.Yang">
-    <title>Blog Login · Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet" >
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
-    <!-- Custom styles for this template -->
-    <link href="/stylesheets/sign_in.css" rel="stylesheet">
-
-    <script src="/javascripts/jquery-3.3.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-</head>
+<%- include('base/header', {name: 'sign_in'}) %>
 
 <body>
-    <form class="form-signin" id='new_session' action='/login' accept-charset='UTF-8' method='post'>
+    <form class="form-signin" action='/login' accept-charset='UTF-8' method='post'>
         <div class="text-center mb-4">
             <img class="mb-4" src="/images/Naruto.jpg" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">My Blog</h1>
@@ -56,28 +25,11 @@
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" id='sign-in-form-submit-btn' type="button">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" id='sign-in-form-submit-btn' type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted text-center">© 2018-2019</p>
     </form>
-
-    <script>
-        (function(win, doc, $) {
-            $('#sign-in-form-submit-btn').on('click', event => {
-                $.post('/login', {
-                    user_name: $('#session_email_or_mobile_number').val(),
-                    password: $('#session_password').val()
-                }).then(response => {
-                    if (response.code) {
-                        localStorage.setItem('Authorization', response.data.token);
-                        win.location.href = '/';
-                    } else {
-                        alert(response.msg);
-                    }
-                }).catch(error => {
-                    console.log('error :', error);
-                });
-            });
-        })(window, document, jQuery);
-    </script>
+    <% if (message) {%>
+    <h1><%= message %></h1>
+    <% } %>
 </body>
 </html>

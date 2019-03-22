@@ -1,25 +1,44 @@
 const express = require('express');
 const router = express.Router();
 
-const jwt = require('./jwt');
+// const jwt = require('./jwt');
+
 const login = require('./login');
-const users = require('./users');
-const comments = require('./comments');
+const graphql = require('./graphql');
+const api = require('./api');
+const bodyParser = require('body-parser');
 
-router.use(jwt);
+// router.use(jwt);
 
-router.route('/').get((req, res) => {
+// Filter Auth
+let isAuthenticated = function (req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+
+    res.redirect('/login');
+};
+
+router.route('/').get(isAuthenticated, (req, res) => {
+    console.log('This is / :', 'req.user');
+
     res.render('index', { title: 'Hello Would~~~' });
 });
 
+router.use('/login', login);
 router.route('/register').get((req, res) => {
     res.render('sign_up');
 });
 
-router.use('/login', login);
-router.use('/users', users);
-router.use('/comments', comments);
+router.use('/api', api); // Ajax请求汇总
+router.use('/graphql', bodyParser.text({ type: 'application/graphql' }), graphql);
 
+router.route('/logout').get((req, res) => {
+    req.logOut();
+    res.redirect('/');
+});
+
+// Filter
 router.use((req, res, next) => {
     var err = new Error('Not Found');
     err.status = 404;
@@ -33,11 +52,9 @@ router.use((err, req, res, next) => {
 });
 
 router.use((err, req, res, next) => {
-    // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    // render the error page
     res.status(err.status || 500);
     res.render('error');
 });

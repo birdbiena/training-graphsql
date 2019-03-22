@@ -1,17 +1,5 @@
 const Database = require('../../data/Database');
 const user = require('../../data/user_sql');
-
-// const jsonWrite = function(res, ret) {
-//     if (typeof ret === 'undefined') {
-//         res.json({
-//             code: 1,
-//             msg: 'failed'
-//         });
-//     } else {
-//         res.json(ret);
-//     }
-// };
-
 const database = new Database();
 
 module.exports = {
@@ -35,12 +23,12 @@ module.exports = {
 	},
 
 	delete: function(key) {
-		// 标记型删除
 		return database.query(user.user_info.delete, key);
 	},
 
 	queryById: function(key) {
-		return database.query(user.user_info.queryById, key);
+        return database.query(user.user_info.queryById, key);
+		// return database.query(user.user_login.queryById, key);
 	},
 
 	queryAll: function() {

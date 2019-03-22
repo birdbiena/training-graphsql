@@ -18,7 +18,7 @@ const jwtAuth = expressJwt({
         return token;
     }
 }).unless({
-    path: ['/', '/register', '/login']
+    path: ['/', '/register', '/login', '/graphql', '/api']
 });
 
 module.exports = jwtAuth;

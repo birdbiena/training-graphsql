@@ -5,6 +5,7 @@ const userService = require('./../features/user/service');
 
 router.route('/')
     .get((req, res) => {
+        console.log('req.user :', req.user);
         userService.queryAll().then((data) => {
             res.json(data).end();
         });
@@ -16,17 +17,17 @@ router.route('/')
     });
 
 router.route('/:user_id')
-    .get(function(req, res) {
+    .get((req, res) => {
         userService.queryById([req.params.user_id]).then((data) => {
             res.json(data);
         });
     })
-    .put(function(req, res) {
+    .put((req, res) => {
         userService.update(req.query, req.params.user_id).then((data) => {
             res.json(data);
         });
     })
-    .delete(function(req, res) {
+    .delete((req, res) => {
         // delete
         var test = {
             type: 'DELETE',
