@@ -4,11 +4,11 @@ const passport = require('passport');
 
 const config = require('./../conf/base');
 
-router.route('/').get((req, res) => {
+router.route('/login').get((req, res) => {
     res.render('sign_in', { message: req.flash('message') });
 });
 
-router.route('/').post((req, res, next) => {
+router.route('/login').post((req, res, next) => {
     passport.authenticate('local-login', (err, user, info) => {
         if (err) {
             return next(err);
@@ -28,19 +28,18 @@ router.route('/').post((req, res, next) => {
 
             req.flash('message', 'Login Success!');
 
-            return res.cookie('Bearer', config.generateToken({ id: user.id }, 1), { maxAge: 60 * 1000 })
-                .redirect('/');
-
-            // const token = base.generateToken(user); // 生成token,默认有效1分钟。
-            // const minutes = 60 * 1000; // 分钟
-
-            // return res.cookie('JWT_TOKEN', token, { maxAge: minutes, httpOnly: true })
-            //     .json({
-            //         code: 1,
-            //         data: { token }
-            //     }).end();
+            return res.cookie('Bearer', config.generateToken({ id: user.id }, 1), { maxAge: 60 * 1000 }).redirect('/');
         });
     })(req, res, next);
+});
+
+router.route('/logout').get((req, res) => {
+    req.logOut();
+    res.redirect('/auth/login');
+});
+
+router.route('/register').get((req, res) => {
+    res.render('sign_up');
 });
 
 module.exports = router;

@@ -1,12 +1,12 @@
 ---
 root: true
 parser: 'babel-eslint'
-env: 
+env:
   commonjs: true
   browser: true
   node: true
   es6: true
-extends: 
+extends:
   - standard
   - eslint:recommended
   - plugin:node/recommended
@@ -14,4 +14,8 @@ plugins:
   - node
   - html
 rules: {}
-globals: {}
+globals:
+  jQuery: true
+  moment: true
+  Cookies: true
+  _: true

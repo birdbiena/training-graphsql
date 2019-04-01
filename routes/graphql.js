@@ -1,15 +1,25 @@
 const express = require('express');
 const router = express.Router();
-
-const { graphql } = require('graphql');
+// const graphql = require('graphql').graphql;
 const schema = require('./../data/schema');
 
-router.route('/').post((req, res) => {
-    graphql(schema, req.body).then(data => {
-        res.json({code: 1, data: data, msg: 'success'}).end();
-    });
-});
+var graphqlHTTP = require('express-graphql');
 
-// curl -v -XPOST -H 'Content-Type:application/graphql' -d 'query UserQuery { info(id: 8) { username, mobile, createtime } }' http://localhost:3000/graphql
+// router.use(bodyParser.text({ type: 'application/graphql' }));
+// router.route('/').post((req, res) => {
+//     graphql(schema, req.body).then(data => {
+//         if (data.errors) {
+//             return res.json({code: 0, data: [], msg: data.errors.toString()}).end();
+//         }
+
+//         return res.json({code: 1, data: data.data, msg: 'success'}).end();
+//     });
+// });
+
+router.use('/', graphqlHTTP({
+    schema: schema,
+    graphiql: true,
+    pretty: false
+}));
 
 module.exports = router;

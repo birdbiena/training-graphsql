@@ -36,98 +36,17 @@
             </small>
         </div>
 
-        <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <div class="my-3 p-3 bg-white rounded shadow-sm" id="user_list">
             <h6 class="border-bottom border-gray pb-2 mb-0">Suggestions</h6>
-            <div class="media text-muted pt-3">
-                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
-                    preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
-                    <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
-                </svg>
-                <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                    <div class="d-flex justify-content-between align-items-center w-100">
-                        <strong class="text-gray-dark">Full Name</strong>
-                        <a href="#">Follow</a>
-                    </div>
-                    <span class="d-block">@username</span>
-                </div>
-            </div>
-            <div class="media text-muted pt-3">
-                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
-                    preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
-                    <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
-                </svg>
-                <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                    <div class="d-flex justify-content-between align-items-center w-100">
-                        <strong class="text-gray-dark">Full Name</strong>
-                        <a href="#">Follow</a>
-                    </div>
-                    <span class="d-block">@username</span>
-                </div>
-            </div>
-            <div class="media text-muted pt-3">
-                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
-                    preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
-                    <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
-                </svg>
-                <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                    <div class="d-flex justify-content-between align-items-center w-100">
-                        <strong class="text-gray-dark">Full Name</strong>
-                        <a href="#">Follow</a>
-                    </div>
-                    <span class="d-block">@username</span>
-                </div>
-            </div>
+
             <small class="d-block text-right mt-3">
-                <a href="#">All suggestions</a>
+                <a href="#" id="user_button">Get User</a>
+                <a href="#" id="users_button" class="ml-3">Get User All</a>
             </small>
         </div>
     </main>
 
-    <script>
-        (function (win, doc, $) {
-            $('[data-toggle="offcanvas"]').on('click', function () {
-                $('.offcanvas-collapse').toggleClass('open')
-            });
-
-            // let token = localStorage.getItem('Authorization');
-            let token = Cookies.get('Bearer');
-
-            $.ajax({
-                url: '/api/article',
-                type: 'GET',
-                headers: {
-                    authorization: `Bearer ${token}`
-                }
-            }).then(response => {
-                let template = '';
-                let arr = [];
-
-                response.data.forEach((item, index) => {
-                    template = `
-                        <div class="media text-muted pt-3">
-                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
-                                preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
-                            </svg>
-                            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                                <strong class="d-block text-gray-dark">${item.title} ${moment(item.create_time, 'YYYY-MM-DD hh:mm:ss').fromNow()}</strong>
-                                ${item.content}
-                            </p>
-                        </div>`;
-                    arr.push(template);
-                });
-
-                $('#article_list').find('h6').after(arr.join(''));
-            }).catch(error => {
-                window.location.href = '/login';
-            });
-        })(window, document, jQuery);
-    </script>
-
+    <script src="/javascripts/index.js"></script>
 </body>
 
 </html>

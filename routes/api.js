@@ -6,6 +6,9 @@ const article = require('./article');
 const users = require('./users');
 const comments = require('./comments');
 
+// Graphql
+const graphql = require('./graphql');
+
 router.use(passport.authenticate('jwt', { session: false }));
 
 router.route('/').get((req, res) => {
@@ -15,5 +18,6 @@ router.route('/').get((req, res) => {
 router.use('/article', article);
 router.use('/users', users);
 router.use('/comments', comments);
+router.use('/graphql', graphql);
 
 module.exports = router;

@@ -54,15 +54,4 @@ module.exports = passport => {
             return done(null, user_info);
         });
     }));
-
-    // passport.use(new BearerStrategy((token, done) => {
-    //     console.log('token :', token);
-    //     let user = {
-    //         id: 1,
-    //         user_name: 'birdbiena',
-    //         email: 'birdbiena@gmail.com'
-    //     };
-
-    //     return done(null, user, { scope: 'all' });
-    // }));
 };
