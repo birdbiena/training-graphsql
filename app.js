@@ -14,7 +14,9 @@ const index = require('./routes/index');
 const app = express();
 
 // For each request, provide wildcard Access-Control-* headers via OPTIONS call
-app.use(cors());
+app.use(cors({
+    origin: '*'
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

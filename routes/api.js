@@ -8,6 +8,10 @@ const comments = require('./comments');
 
 // Graphql
 const graphql = require('./graphql');
+const todo = require('./todo');
+
+
+router.use('/todo', todo);
 
 router.use(passport.authenticate('jwt', { session: false }));
 
