@@ -4,8 +4,6 @@ const router = express.Router();
 const articleService = require('./../features/article/service');
 
 router.route('/').get((req, res) => {
-    console.log('This is article :', 'req.user');
-
     let state = 1;
 
     if (typeof req.params.state !== 'undefined') {

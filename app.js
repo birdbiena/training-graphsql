@@ -7,16 +7,9 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
 const flash = require('connect-flash');
-const cors = require('cors');
-
 const index = require('./routes/index');
 
 const app = express();
-
-// For each request, provide wildcard Access-Control-* headers via OPTIONS call
-app.use(cors({
-    origin: '*'
-}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -35,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 require('./routes/passport')(passport);
 
-app.use(cookieParser());
+app.use(cookieParser('ThanKs123@1.Snail'));
 app.use(
     session({
         name: 'sessionid',

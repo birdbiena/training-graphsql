@@ -1,14 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const cors = require('cors');
+
 // const jwt = require('./jwt');
 const login = require('./login');
 const api = require('./api');
 
 let isAuthenticated = function (req, res, next) {
+    console.log('req.isAuthenticated() :', req.isAuthenticated());
     if (req.isAuthenticated()) {
         return next();
     }
 
+    req.flash({ message: '' }); // 登陆失效，清空flash消息
     res.redirect('/auth/login');
 };
 
@@ -17,7 +21,7 @@ router.route('/').get(isAuthenticated, (req, res) => {
 });
 
 router.use('/auth', login);
-router.use('/api', api); // Ajax请求汇总
+router.use('/api', cors(), api); // Ajax请求汇总
 
 router.use((req, res, next) => {
     var err = new Error('Not Found');

@@ -3,27 +3,28 @@ const router = express.Router();
 
 const userService = require('./../features/user/service');
 
-router.route('/')
+router
+    .route('/')
     .get((req, res) => {
-        console.log('req.user :', req.user);
-        userService.queryAll().then((data) => {
+        userService.queryAll().then(data => {
             res.json(data).end();
         });
     })
     .post(function(req, res) {
-        userService.add(req.query).then((data) => {
+        userService.add(req.query).then(data => {
             res.json(data);
         });
     });
 
-router.route('/:user_id')
+router
+    .route('/:user_id')
     .get((req, res) => {
-        userService.queryById([req.params.user_id]).then((data) => {
+        userService.queryById([req.params.user_id]).then(data => {
             res.json(data);
         });
     })
     .put((req, res) => {
-        userService.update(req.query, req.params.user_id).then((data) => {
+        userService.update(req.query, req.params.user_id).then(data => {
             res.json(data);
         });
     })

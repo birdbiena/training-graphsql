@@ -1,57 +1,25 @@
-// import _ from 'lodash';
-
-function randomString(len) {
-    len = len || 32;
-    // let timestamp = new Date().getTime();
-    let $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
-    let maxPos = $chars.length;
-    let randomStr = '';
-
-    for (let i = 0; i < len; i += 1) {
-        randomStr += $chars.charAt(Math.floor(Math.random() * maxPos));
-    }
-
-    return randomStr;
-}
+const _ = require('lodash');
+const Database = require('./../../data/Database');
+const todo = require('./../../data/todo');
+const database = new Database();
 
 module.exports = {
-    queryAll: function() {
-        let list = [];
-        let obj = null;
+    findALl: function(id) {
+        id = id || `099C18124ED811E9B4337E1A06CF0192`;
+        return database.query(todo.todo.findAll, id);
+    },
 
-        obj = function(i) {
-            return { id: randomString(), item: `开发-${i}`, done: false, create: new Date().getTime() };
-        };
+    findOne: function(id) {},
 
-        let len = 10;
+    add: function(item) {
+        return database.query(todo.todo.insert, item);
+    },
 
-        while (len > 0) {
-            list.push(obj);
-            len -= 1;
-        }
+    remove: function(ids) {
+        return database.query(todo.todo.remove, ids);
+    },
 
-        return {
-            list: [
-                { id: randomString(), item: '开发-1', done: false, create: new Date().getTime() },
-                { id: randomString(), item: '测试-1', done: false, create: new Date().getTime() },
-                { id: randomString(), item: '链调-1', done: false, create: new Date().getTime() },
-                { id: randomString(), item: '开发-2', done: false, create: new Date().getTime() },
-                { id: randomString(), item: '测试-2', done: false, create: new Date().getTime() },
-                { id: randomString(), item: '链调-2', done: false, create: new Date().getTime() },
-                { id: randomString(), item: '开发-3', done: false, create: new Date().getTime() },
-                { id: randomString(), item: '测试-3', done: false, create: new Date().getTime() },
-                { id: randomString(), item: '链调-3', done: false, create: new Date().getTime() },
-                { id: randomString(), item: '开发-4', done: false, create: new Date().getTime() },
-                { id: randomString(), item: '测试-4', done: false, create: new Date().getTime() },
-                { id: randomString(), item: '链调-4', done: false, create: new Date().getTime() },
-                { id: randomString(), item: '开发-5', done: false, create: new Date().getTime() },
-                { id: randomString(), item: '测试-5', done: false, create: new Date().getTime() },
-                { id: randomString(), item: '链调-5', done: false, create: new Date().getTime() }
-            ],
-
-            headers: [{ key: 'id', name: 'id', dataIndex: 'id' }, { key: 'name', name: 'Name', dataIndex: 'name' }, { key: 'state', name: 'State', dataIndex: 'state' }, { key: 'date', name: 'Date', dataIndex: 'date' }],
-
-            number: len
-        };
+    update: function(task) {
+        return database.query(todo.todo.update, _.toArray(task));
     }
 };
